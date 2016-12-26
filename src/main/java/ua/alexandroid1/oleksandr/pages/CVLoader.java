@@ -47,7 +47,7 @@ public class CVLoader {
 
     public ArrayList<String> getCvIds() {
         ArrayList<String> getProfileIds = new ArrayList<String>();
-        java.util.List<WebElement> links = driver.findElements(By.xpath("//a[contains(@data-qa,'vacancy-title')]"));
+        java.util.List<WebElement> links = driver.findElements(By.xpath("//a[@data-qa='vacancy-serp__vacancy-title']"));
 
         for (int i = 0; i < links.size(); i++) {
             String profileUrl = links.get(i).getAttribute("href");
@@ -66,7 +66,7 @@ public class CVLoader {
 
     public void getNextPage(int waitSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, waitSeconds);
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@data-qa='pager-next']")));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@data-qa,'pager-next')]")));
         element.click();
     }
 

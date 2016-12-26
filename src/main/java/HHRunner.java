@@ -4,6 +4,8 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
 import ua.alexandroid1.oleksandr.pages.CVLoader;
 
+import java.util.ArrayList;
+
 public class HHRunner {
 
     public static void main(String[] args) {
@@ -21,5 +23,10 @@ public class HHRunner {
                 .setSearchURL("http://www.hh.ru")
                 .setSearchKeyWord("java")
                 .searchByKeyWord(waitSeconds);
+
+        while (true){
+            cvLoader.getNextPage(waitSeconds);
+            ArrayList<String> getProfileIds = cvLoader.getCvIds();
+        }
     }
 }
