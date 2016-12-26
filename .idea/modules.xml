@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/cv-loader.iml" filepath="$PROJECT_DIR$/.idea/modules/cv-loader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cv-loader_main.iml" filepath="$PROJECT_DIR$/.idea/modules/cv-loader_main.iml" group="cv-loader" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cv-loader_test.iml" filepath="$PROJECT_DIR$/.idea/modules/cv-loader_test.iml" group="cv-loader" />
     </modules>
   </component>
 </project>

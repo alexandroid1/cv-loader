@@ -11,4 +11,14 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
+
+    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.0.1'
+
+    // For downloading browser-specific drivers that browsers like Chrome and IE require
+    compile("io.github.bonigarcia:webdrivermanager:1.4.1") {
+        exclude group: 'org.seleniumhq.selenium'
+    }
+
+    compile group: 'org.jbehave.web', name: 'jbehave-web-selenium', version: '3.5.5'
 }
