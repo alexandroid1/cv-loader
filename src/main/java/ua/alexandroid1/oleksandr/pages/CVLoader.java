@@ -11,10 +11,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class CVLoader {
 
-    private static final String url = "http://www.hh.ru";
-
     private WebDriver driver;
-    private String searchKeyWord = null;
+    private String searchUrl;
+    private String searchKeyWord;
 
     public CVLoader(WebDriver driver)
     {
@@ -27,21 +26,23 @@ public class CVLoader {
         return this;
     }
 
-    public String search(int waitSeconds)
+    public CVLoader setSearchURL(String searchUrl)
     {
-        driver.get(url);
-
-        WebDriverWait wait = new WebDriverWait(driver, waitSeconds);
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@data-qa='vacancy-serp__query']")));
-
-        element.click();
-        element.sendKeys(searchKeyWord);
-
-        wait = new WebDriverWait(driver, waitSeconds);
-        element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@data-qa='navi-search__button']")));
-        element.click();
-        return "";
+        this.searchUrl = searchUrl;
+        return this;
     }
 
+    public void searchByKeyWord(int waitSeconds)
+    {
+        driver.get(searchUrl);
+        WebDriverWait wait = new WebDriverWait(driver, waitSeconds);
+
+        WebElement searchInputField = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@data-qa='vacancy-serp__query']")));
+        searchInputField.click();
+        searchInputField.sendKeys(searchKeyWord);
+
+        WebElement searchButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@data-qa='navi-search__button']")));
+        searchButton.click();
+    }
 
 }
