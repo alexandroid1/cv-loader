@@ -1,6 +1,6 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import ua.alexandroid1.oleksandr.CVLoader;
+import ua.alexandroid1.oleksandr.pages.CVLoader;
 
 public class HHRunner {
 
@@ -12,9 +12,14 @@ public class HHRunner {
 
         double randNumber = Math.random();
         int waitSeconds = (int)randNumber * 10 + 5;
+
+
+
         CVLoader cvLoader = new CVLoader(driver);
         cvLoader
-                .setKeyword("java")
+                .setSearchKeyWord("java")
                 .search(waitSeconds);
+
+        driver.quit();
     }
 }

@@ -1,4 +1,4 @@
-package ua.alexandroid1.oleksandr;
+package ua.alexandroid1.oleksandr.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -14,17 +14,16 @@ public class CVLoader {
     private static final String url = "http://www.hh.ru";
 
     private WebDriver driver;
-    private String keyword = null;
-    private String content = null;
+    private String searchKeyWord = null;
 
     public CVLoader(WebDriver driver)
     {
         this.driver = driver;
     }
 
-    public CVLoader setKeyword(String keyword)
+    public CVLoader setSearchKeyWord(String searchKeyWord)
     {
-        this.keyword = keyword;
+        this.searchKeyWord = searchKeyWord;
         return this;
     }
 
@@ -36,7 +35,7 @@ public class CVLoader {
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@data-qa='vacancy-serp__query']")));
 
         element.click();
-        element.sendKeys(keyword);
+        element.sendKeys(searchKeyWord);
 
         wait = new WebDriverWait(driver, waitSeconds);
         element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@data-qa='navi-search__button']")));
