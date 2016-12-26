@@ -20,15 +20,15 @@ public class CVLoader {
         this.driver = driver;
     }
 
-    public CVLoader setSearchKeyWord(String searchKeyWord)
-    {
-        this.searchKeyWord = searchKeyWord;
-        return this;
-    }
-
     public CVLoader setSearchURL(String searchUrl)
     {
         this.searchUrl = searchUrl;
+        return this;
+    }
+
+    public CVLoader setSearchKeyWord(String searchKeyWord)
+    {
+        this.searchKeyWord = searchKeyWord;
         return this;
     }
 
