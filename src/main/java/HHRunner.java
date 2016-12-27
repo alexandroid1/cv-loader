@@ -21,7 +21,7 @@ public class HHRunner extends PropLoader {
         WebDriver driver = new FirefoxDriver(myprofile);
 
         double randNumber = Math.random();
-        int waitSeconds = (int)randNumber * 10 + 5;
+        int waitSeconds = (int)randNumber * 1000 + 500;
 
         CVLoader cvLoader = new CVLoader(driver);
         cvLoader
@@ -29,8 +29,7 @@ public class HHRunner extends PropLoader {
                 .setSearchKeyWord(prop.getProperty("searchKeyWord"))
                 .searchByKeyWord(waitSeconds);
 
-        while (true){
-            cvLoader.getNextPage(waitSeconds);
+        while (cvLoader.getNextPage(waitSeconds)){
             ArrayList<String> getProfileIds = cvLoader.getCvIds();
         }
     }

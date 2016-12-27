@@ -1,12 +1,14 @@
 package ua.alexandroid1.oleksandr.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,6 +20,7 @@ public class CVLoader {
     private WebDriver driver;
     private String searchUrl;
     private String searchKeyWord;
+    private String nextPageURL = null;
 
     public CVLoader(WebDriver driver) {
         this.driver = driver;
@@ -31,6 +34,14 @@ public class CVLoader {
     public CVLoader setSearchKeyWord(String searchKeyWord) {
         this.searchKeyWord = searchKeyWord;
         return this;
+    }
+
+    public String getNextPageURL() {
+        return nextPageURL;
+    }
+
+    public void setNextPageURL(String nextPageURL) {
+        this.nextPageURL = nextPageURL;
     }
 
     public void searchByKeyWord(int waitSeconds) {
@@ -48,11 +59,16 @@ public class CVLoader {
     public ArrayList<String> getCvIds() {
         ArrayList<String> getProfileIds = new ArrayList<String>();
         java.util.List<WebElement> links = driver.findElements(By.xpath("//a[@data-qa='vacancy-serp__vacancy-title']"));
-
         for (int i = 0; i < links.size(); i++) {
-            String profileUrl = links.get(i).getAttribute("href");
-            getProfileIds.add(getIDfromProfileUrl(profileUrl));
-            System.out.println(getIDfromProfileUrl(profileUrl));
+            try{
+                System.out.println(links.get(i).getAttribute("innerHTML"));
+                String profileUrl = links.get(i).getAttribute("href");
+
+                getProfileIds.add(getIDfromProfileUrl(profileUrl));
+                System.out.println(getIDfromProfileUrl(profileUrl));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return getProfileIds;
     }
@@ -64,11 +80,22 @@ public class CVLoader {
         return null;
     }
 
-    public void getNextPage(int waitSeconds) {
-        WebDriverWait wait = new WebDriverWait(driver, waitSeconds);
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@data-qa,'pager-next')]")));
-        element.click();
+    public boolean getNextPage(int waitSeconds) {
+        try {
+            if (nextPageURL != null && !nextPageURL.isEmpty()) driver.get(getNextPageURL());
+            WebDriverWait wait = new WebDriverWait(driver, waitSeconds);
+            try {
+                WebElement nextLink = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@data-qa='pager-next']")));
+                setNextPageURL(nextLink.getAttribute("href"));
+                System.out.println(" link next = " + nextLink.getAttribute("href"));
+                nextLink.click();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return true;
+        } catch (NoSuchElementException ignored) {
+            return false;
+        }
     }
-
-
+    
 }
