@@ -4,13 +4,16 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
 import ua.alexandroid1.oleksandr.pages.CVLoader;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class HHRunner {
 
     public static void main(String[] args) {
 
-        System.setProperty("webdriver.gecko.driver","C:\\Selenium\\Firefox driver\\geckodriver.exe");
+        File f = new File("geckodriver.exe");
+        System.setProperty("webdriver.gecko.driver", f.getAbsolutePath());
         ProfilesIni profile = new ProfilesIni();
         FirefoxProfile myprofile = profile.getProfile("default");
         WebDriver driver = new FirefoxDriver(myprofile);
