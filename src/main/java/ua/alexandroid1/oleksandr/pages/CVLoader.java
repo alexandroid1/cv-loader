@@ -1,7 +1,6 @@
 package ua.alexandroid1.oleksandr.pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -60,7 +59,7 @@ public class CVLoader {
         ArrayList<String> getProfileIds = new ArrayList<String>();
         java.util.List<WebElement> links = driver.findElements(By.xpath("//a[@data-qa='vacancy-serp__vacancy-title']"));
         for (int i = 0; i < links.size(); i++) {
-            try{
+            try {
                 System.out.println(links.get(i).getAttribute("innerHTML"));
                 String profileUrl = links.get(i).getAttribute("href");
 
@@ -97,5 +96,5 @@ public class CVLoader {
             return false;
         }
     }
-    
+
 }
