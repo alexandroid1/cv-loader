@@ -3,16 +3,17 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
 import ua.alexandroid1.oleksandr.pages.CVLoader;
+import ua.alexandroid1.oleksandr.pages.PropLoader;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Properties;
 
-public class HHRunner {
+public class HHRunner extends PropLoader {
 
     public static void main(String[] args) {
 
-        Properties prop = new Properties();
+        Properties prop = getProperties();
         File f = new File(prop.getProperty("driverPathName"));
         System.setProperty("webdriver.gecko.driver", f.getAbsolutePath());
         ProfilesIni profile = new ProfilesIni();
@@ -33,4 +34,5 @@ public class HHRunner {
             ArrayList<String> getProfileIds = cvLoader.getCvIds();
         }
     }
+
 }
