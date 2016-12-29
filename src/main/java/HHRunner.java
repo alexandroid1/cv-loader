@@ -2,6 +2,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
+import ua.alexandroid1.oleksandr.pages.CVApplyer;
 import ua.alexandroid1.oleksandr.pages.CVLoader;
 import ua.alexandroid1.oleksandr.pages.PropLoader;
 
@@ -30,7 +31,12 @@ public class HHRunner extends PropLoader {
                 .searchByKeyWord(waitSeconds);
 
         while (cvLoader.getNextPage(waitSeconds)){
-            ArrayList<String> getProfileIds = cvLoader.getCvIds();
+            ArrayList<String> getCvIds = cvLoader.getCvIds(waitSeconds);
+
+            getCvIds.forEach((cvId) -> {
+                CVApplyer cvApplyer = new CVApplyer(driver, cvId);
+                cvApplyer.applyForCV();
+            });
         }
     }
 

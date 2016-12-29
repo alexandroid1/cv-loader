@@ -1,5 +1,6 @@
 package ua.alexandroid1.oleksandr.pages;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -55,19 +56,20 @@ public class CVLoader {
         searchButton.click();
     }
 
-    public ArrayList<String> getCvIds() {
+    public ArrayList<String> getCvIds(int waitSeconds) {
         ArrayList<String> getProfileIds = new ArrayList<String>();
-        java.util.List<WebElement> links = driver.findElements(By.xpath("//a[@data-qa='vacancy-serp__vacancy-title']"));
-        for (int i = 0; i < links.size(); i++) {
-            try {
-                System.out.println(links.get(i).getAttribute("innerHTML"));
-                String profileUrl = links.get(i).getAttribute("href");
-
-                getProfileIds.add(getIDfromProfileUrl(profileUrl));
-                System.out.println(getIDfromProfileUrl(profileUrl));
-            } catch (Exception e) {
-                e.printStackTrace();
+        try {
+            java.util.List<WebElement> links = driver.findElements(By.xpath("//a[@data-qa='vacancy-serp__vacancy-title']"));
+            for (int i = 0; i < links.size(); i++) {
+                try {
+                    String profileUrl = links.get(i).getAttribute("href");
+                    getProfileIds.add(getIDfromProfileUrl(profileUrl));
+                } catch (Exception e) {
+                    System.out.print("-");
+                }
             }
+        } catch (NoSuchElementException ignored) {
+            System.out.print("-");
         }
         return getProfileIds;
     }
@@ -89,7 +91,7 @@ public class CVLoader {
                 System.out.println(" link next = " + nextLink.getAttribute("href"));
                 nextLink.click();
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.print("-");
             }
             return true;
         } catch (NoSuchElementException ignored) {
