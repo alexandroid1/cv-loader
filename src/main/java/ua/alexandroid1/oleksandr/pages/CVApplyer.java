@@ -1,9 +1,6 @@
 package ua.alexandroid1.oleksandr.pages;
 
-import junit.framework.Assert;
-import org.hamcrest.core.Is;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -59,7 +56,7 @@ public class CVApplyer {
                     System.out.print("-");
                 }
 
-
+                // show text area link click
                 if (driver.findElements(By.xpath("//span[@class='link-switch-secondary']")).size() > 0) {
                     // show text area
                     try {
