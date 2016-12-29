@@ -35,7 +35,7 @@ public class HHRunner extends PropLoader {
 
             getCvIds.forEach((cvId) -> {
                 CVApplyer cvApplyer = new CVApplyer(driver, cvId);
-                cvApplyer.applyForCV();
+                cvApplyer.applyForCV(waitSeconds);
             });
         }
     }
