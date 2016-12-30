@@ -61,6 +61,11 @@ public class CVApplyer {
 
     private void preApply() {
         try {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             WebElement applyLink = driver.findElement(By.xpath("//a[@data-qa='vacancy-response-link']"));
             applyLink.click();
         } catch (NoSuchElementException ignored) {
@@ -70,6 +75,11 @@ public class CVApplyer {
 
     private void applyFromAnywhere(int waitSeconds) {
         try {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             WebDriverWait wait = new WebDriverWait(driver, waitSeconds);
             WebElement applyFromAnywhereLnk = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@data-qa='vacancy-response-link-force']")));
             applyFromAnywhereLnk.click();
@@ -80,6 +90,11 @@ public class CVApplyer {
 
     private void showTextArea(int waitSeconds) {
         try {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             WebDriverWait wait = new WebDriverWait(driver, waitSeconds);
             WebElement showTextArea = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@class='link-switch-secondary']")));
             showTextArea.click();
@@ -90,7 +105,7 @@ public class CVApplyer {
 
     private void coverLetter() {
         if((driver.findElements(By.xpath("//textarea[@name='letter']")).size() > 0)) {
- 
+
                 //TODO breakpoint here ???
                 // paste cover letter manually
                 try {
@@ -105,6 +120,11 @@ public class CVApplyer {
     private void apply(int waitSeconds) {
         if (driver.findElements(By.xpath("//input[contains(@value,'Отправить отклик')]")).size() > 0) {
             try {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 WebDriverWait wait = new WebDriverWait(driver, waitSeconds);
                 WebElement submitClickLnk = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[contains(@value,'Отправить отклик')]")));
                 submitClickLnk.click();
