@@ -9,7 +9,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -22,8 +21,6 @@ public class CVApplyer {
     private static final String url = "https://hh.ru/vacancy/";
     private WebDriver driver;
     private String cvId;
-
-
 
     public CVApplyer(WebDriver driver, String cvId) {
         this.driver = driver;

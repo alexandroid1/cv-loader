@@ -10,12 +10,14 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.Scanner;
 
 public class HHRunner extends PropLoader {
 
     public static void main(String[] args) {
 
         List<String> appliedList = new ArrayList<>();
+        fileToList(appliedList);
 
         Properties prop = getProperties();
         File f = new File(prop.getProperty("driverPathName"));
@@ -41,6 +43,19 @@ public class HHRunner extends PropLoader {
                 cvApplyer.applyForCV(appliedList, waitSeconds);
             });
         }
+    }
+
+    private static void fileToList(List<String> appliedList) {
+        Scanner s = null;
+        try {
+            s = new Scanner(new File("./appliedList.txt"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        while (s.hasNext()){
+            appliedList.add(s.next());
+        }
+        s.close();
     }
 
 }
