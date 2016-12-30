@@ -23,94 +23,80 @@ public class CVApplyer {
         this.cvId = cvId;
     }
 
-    public boolean isElementPresent_1(WebDriver driver, By locator) {
-        try {
-            driver.findElement(locator);
-            return true;
-        } catch (NoSuchElementException e) {
-            return false;
-        }
-    }
-
     public void applyForCV(int waitSeconds) {
         driver.get(url + cvId);
         System.out.println("");
         System.out.println(url + cvId);
 
         if (driver.findElements(By.xpath("//a[@data-qa='vacancy-response-link']")).size() > 0) {
-            // green button apply click
+            preApply();
+            if (driver.findElements(By.xpath("//span[@data-qa='vacancy-response-link-force']")).size() > 0) {
+                applyFromAnywhere(waitSeconds);
+                if (driver.findElements(By.xpath("//span[@class='link-switch-secondary']")).size() > 0) {
+                    showTextArea(waitSeconds);
+                }
+                if((driver.findElements(By.xpath("//input[contains(@value,'Отправить отклик')]")).size() > 0)){
+                    coverLetter();
+                    apply(waitSeconds);
+                    apply(waitSeconds);
+                }
+            }
+        }
+    }
+
+    private void preApply() {
+        try {
+            WebElement applyLink = driver.findElement(By.xpath("//a[@data-qa='vacancy-response-link']"));
+            applyLink.click();
+        } catch (NoSuchElementException ignored) {
+            System.out.print("-");
+        }
+    }
+
+    private void applyFromAnywhere(int waitSeconds) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, waitSeconds);
+            WebElement applyFromAnywhereLnk = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@data-qa='vacancy-response-link-force']")));
+            applyFromAnywhereLnk.click();
+        } catch (NoSuchElementException ignored) {
+            System.out.print("-");
+        }
+    }
+
+    private void showTextArea(int waitSeconds) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, waitSeconds);
+            WebElement showTextArea = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@class='link-switch-secondary']")));
+            showTextArea.click();
+        } catch (NoSuchElementException ignored) {
+            System.out.print("-");
+        }
+    }
+
+    private void coverLetter() {
+        if((driver.findElements(By.xpath("//textarea[@name='letter']")).size() > 0)) {
             try {
-                WebElement applyLink = driver.findElement(By.xpath("//a[@data-qa='vacancy-response-link']"));
-                applyLink.click();
+                Set<String> handles = driver.getWindowHandles();//To handle multiple windows
+                String firstWinHandle = driver.getWindowHandle();
+                handles.remove(firstWinHandle);
+                    WebElement coverLetterArea = driver.findElement(By.xpath("//textarea[@name='letter']"));
+                    coverLetterArea.sendKeys("Добрый день!");
             } catch (NoSuchElementException ignored) {
                 System.out.print("-");
             }
+        }
+    }
 
-            if (driver.findElements(By.xpath("//span[@data-qa='vacancy-response-link-force']")).size() > 0) {
-                // apply from anywhere
-                try {
-                    WebDriverWait wait = new WebDriverWait(driver, waitSeconds);
-                    WebElement applyFromAnywhereLnk = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@data-qa='vacancy-response-link-force']")));
-                    applyFromAnywhereLnk.click();
-                } catch (NoSuchElementException ignored) {
-                    System.out.print("-");
-                }
-
-                // show text area link click
-                if (driver.findElements(By.xpath("//span[@class='link-switch-secondary']")).size() > 0) {
-                    // show text area
-                    try {
-                        WebDriverWait wait = new WebDriverWait(driver, waitSeconds);
-                        WebElement showTextArea = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@class='link-switch-secondary']")));
-                        showTextArea.click();
-                    } catch (NoSuchElementException ignored) {
-                        System.out.print("-");
-                    }
-                }
-
-                if((driver.findElements(By.xpath("//input[contains(@value,'Отправить отклик')]")).size() > 0)){
-
-                    // cover letter
-                    if((driver.findElements(By.xpath("//textarea[@name='letter']")).size() > 0)) {
-                        try {
-                            Set<String> handles = driver.getWindowHandles();//To handle multiple windows
-                            String firstWinHandle = driver.getWindowHandle();
-                            handles.remove(firstWinHandle);
-                                WebElement coverLetterArea = driver.findElement(By.xpath("//textarea[@name='letter']"));
-                                coverLetterArea.sendKeys("Добрый день!");
-                        } catch (NoSuchElementException ignored) {
-                            System.out.print("-");
-                        }
-                    }
-
-                    //apply
-                    if (driver.findElements(By.xpath("//input[contains(@value,'Отправить отклик')]")).size() > 0) {
-                        // submit click
-                        try {
-                            WebDriverWait wait = new WebDriverWait(driver, waitSeconds);
-                            WebElement submitClickLnk = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[contains(@value,'Отправить отклик')]")));
-                            submitClickLnk.click();
-                        } catch (NoSuchElementException ignored) {
-                            System.out.print("нет элемента");
-                        } catch (Exception e) {
-                            System.out.print("something wrong");
-                        }
-                    }
-
-                    //apply 2-nd time
-                    if (driver.findElements(By.xpath("//input[contains(@value,'Отправить отклик')]")).size() > 0) {
-                        // submit click
-                        try {
-                            WebDriverWait wait = new WebDriverWait(driver, waitSeconds);
-                            WebElement submitClickLnk = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[contains(@value,'Отправить отклик')]")));
-                            submitClickLnk.click();
-                        } catch (NoSuchElementException ignored) {
-                            System.out.print("нет элемента");
-                        } catch (Exception e) {
-                            System.out.print("something wrong");
-                        }
-                    }
-                }
+    private void apply(int waitSeconds) {
+        if (driver.findElements(By.xpath("//input[contains(@value,'Отправить отклик')]")).size() > 0) {
+            try {
+                WebDriverWait wait = new WebDriverWait(driver, waitSeconds);
+                WebElement submitClickLnk = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[contains(@value,'Отправить отклик')]")));
+                submitClickLnk.click();
+            } catch (NoSuchElementException ignored) {
+                System.out.print("нет элемента");
+            } catch (Exception e) {
+                System.out.print("something wrong");
             }
         }
     }
