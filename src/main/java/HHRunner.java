@@ -7,10 +7,7 @@ import ua.alexandroid1.oleksandr.pages.CVLoader;
 import ua.alexandroid1.oleksandr.pages.PropLoader;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-import java.util.Scanner;
+import java.util.*;
 
 public class HHRunner extends PropLoader {
 
@@ -27,7 +24,7 @@ public class HHRunner extends PropLoader {
         WebDriver driver = new FirefoxDriver(myprofile);
 
         double randNumber = Math.random();
-        int waitSeconds = (int)randNumber * 1000 + 500;
+        int waitSeconds = (int) randNumber * 1000 + 500;
 
         CVLoader cvLoader = new CVLoader(driver);
         cvLoader
@@ -35,12 +32,14 @@ public class HHRunner extends PropLoader {
                 .setSearchKeyWord(prop.getProperty("searchKeyWord"))
                 .searchByKeyWord(waitSeconds);
 
-        while (cvLoader.getNextPage(waitSeconds)){
+        while (cvLoader.getNextPage(waitSeconds)) {
             ArrayList<String> getCvIds = cvLoader.getCvIds(waitSeconds);
 
             getCvIds.forEach((cvId) -> {
-                CVApplyer cvApplyer = new CVApplyer(driver, cvId);
-                cvApplyer.applyForCV(appliedList, waitSeconds);
+                if(! appliedList.contains(cvId) ){
+                    CVApplyer cvApplyer = new CVApplyer(driver, cvId);
+                    cvApplyer.applyForCV(appliedList, waitSeconds);
+                }
             });
         }
     }
@@ -52,7 +51,7 @@ public class HHRunner extends PropLoader {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        while (s.hasNext()){
+        while (s.hasNext()) {
             appliedList.add(s.next());
         }
         s.close();
