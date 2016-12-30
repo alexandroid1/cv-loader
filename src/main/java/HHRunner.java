@@ -8,11 +8,14 @@ import ua.alexandroid1.oleksandr.pages.PropLoader;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class HHRunner extends PropLoader {
 
     public static void main(String[] args) {
+
+        List<String> appliedList = new ArrayList<>();
 
         Properties prop = getProperties();
         File f = new File(prop.getProperty("driverPathName"));
@@ -35,7 +38,7 @@ public class HHRunner extends PropLoader {
 
             getCvIds.forEach((cvId) -> {
                 CVApplyer cvApplyer = new CVApplyer(driver, cvId);
-                cvApplyer.applyForCV(waitSeconds);
+                cvApplyer.applyForCV(appliedList, waitSeconds);
             });
         }
     }

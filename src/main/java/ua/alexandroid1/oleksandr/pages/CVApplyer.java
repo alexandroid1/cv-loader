@@ -23,18 +23,17 @@ public class CVApplyer {
     private WebDriver driver;
     private String cvId;
 
-    public List<String> appliedList = new ArrayList<>();
+
 
     public CVApplyer(WebDriver driver, String cvId) {
         this.driver = driver;
         this.cvId = cvId;
     }
 
-    public void applyForCV(int waitSeconds) {
+    public void applyForCV(List<String> appliedList, int waitSeconds) {
         driver.get(url + cvId);
         System.out.println("");
         System.out.println(url + cvId);
-
         if (driver.findElements(By.xpath("//a[@data-qa='vacancy-response-link']")).size() > 0) {
             preApply();
             if (driver.findElements(By.xpath("//span[@data-qa='vacancy-response-link-force']")).size() > 0) {
@@ -49,16 +48,16 @@ public class CVApplyer {
                 }
             }
         } else {
-            // already applied
             appliedList.add(cvId);
+            listToFile(appliedList);
+        }
+    }
 
-            String text = "Text to save to file";
-            try {
-                Files.write(Paths.get("./appliedList.txt"), appliedList);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+    private void listToFile(List<String> appliedList) {
+        try {
+            Files.write(Paths.get("./appliedList.txt"), appliedList);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
