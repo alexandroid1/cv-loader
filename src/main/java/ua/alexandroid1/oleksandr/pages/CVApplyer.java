@@ -6,6 +6,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
@@ -17,6 +22,8 @@ public class CVApplyer {
     private static final String url = "https://hh.ru/vacancy/";
     private WebDriver driver;
     private String cvId;
+
+    public List<String> appliedList = new ArrayList<>();
 
     public CVApplyer(WebDriver driver, String cvId) {
         this.driver = driver;
@@ -41,6 +48,17 @@ public class CVApplyer {
                     apply(waitSeconds);
                 }
             }
+        } else {
+            // already applied
+            appliedList.add(cvId);
+
+            String text = "Text to save to file";
+            try {
+                Files.write(Paths.get("./appliedList.txt"), appliedList);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 
