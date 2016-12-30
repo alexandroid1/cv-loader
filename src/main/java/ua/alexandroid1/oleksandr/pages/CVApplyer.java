@@ -90,7 +90,7 @@ public class CVApplyer {
 
     private void coverLetter() {
         if((driver.findElements(By.xpath("//textarea[@name='letter']")).size() > 0)) {
-            try {
+ 
                 //TODO breakpoint here ???
                 // paste cover letter manually
                 try {
@@ -99,9 +99,6 @@ public class CVApplyer {
                     e.printStackTrace();
                 }
 
-            } catch (NoSuchElementException ignored) {
-                System.out.print("-");
-            }
         }
     }
 
