@@ -1,4 +1,5 @@
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
@@ -17,11 +18,13 @@ public class HHRunner extends PropLoader {
         fileToList(appliedList);
 
         Properties prop = getProperties();
-        File f = new File(prop.getProperty("driverPathName"));
-        System.setProperty("webdriver.gecko.driver", f.getAbsolutePath());
-        ProfilesIni profile = new ProfilesIni();
-        FirefoxProfile myprofile = profile.getProfile(prop.getProperty("profileName"));
-        WebDriver driver = new FirefoxDriver(myprofile);
+
+        FirefoxBinary binary = new FirefoxBinary();
+        ProfilesIni profileIni = new ProfilesIni();
+        FirefoxProfile myprofile = profileIni.getProfile(prop.getProperty("profileName"));
+
+        myprofile.setAcceptUntrustedCertificates(true);
+        WebDriver driver = new FirefoxDriver(binary, myprofile);
 
         double randNumber = Math.random();
         int waitSeconds = (int) randNumber * 1000 + 500;
