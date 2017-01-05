@@ -10,8 +10,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 /**
  * Created by Oleksandr on 29.12.2016.
@@ -41,6 +43,7 @@ public class CVApplyer {
                 if((driver.findElements(By.xpath("//input[contains(@value,'Отправить отклик')]")).size() > 0)){
                     coverLetter();
                     apply(waitSeconds);
+                    waiteOneSec();
                     apply(waitSeconds);
                 }
             }
@@ -60,11 +63,7 @@ public class CVApplyer {
 
     private void preApply() {
         try {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            waiteOneSec();
             WebElement applyLink = driver.findElement(By.xpath("//a[@data-qa='vacancy-response-link']"));
             applyLink.click();
         } catch (NoSuchElementException ignored) {
@@ -72,13 +71,17 @@ public class CVApplyer {
         }
     }
 
+    private void waiteOneSec() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void applyFromAnywhere(int waitSeconds) {
         try {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            waiteOneSec();
             WebDriverWait wait = new WebDriverWait(driver, waitSeconds);
             WebElement applyFromAnywhereLnk = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@data-qa='vacancy-response-link-force']")));
             applyFromAnywhereLnk.click();
@@ -89,11 +92,7 @@ public class CVApplyer {
 
     private void showTextArea(int waitSeconds) {
         try {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            waiteOneSec();
             WebDriverWait wait = new WebDriverWait(driver, waitSeconds);
             WebElement showTextArea = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@class='link-switch-secondary']")));
             showTextArea.click();
@@ -107,11 +106,30 @@ public class CVApplyer {
 
                 //TODO breakpoint here ???
                 // paste cover letter manually
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+
+            waiteOneSec();
+
+            String parentWindowHandler = driver.getWindowHandle(); // Store your parent window
+            driver.switchTo().window(parentWindowHandler);  // switch back to parent window
+
+            WebDriverWait wait = new WebDriverWait(driver, 10);
+            WebElement textArea = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//textarea[contains(@class,'sized-rows\n" +
+                    "                                      HH-VacancyResponsePopup-Letter ')]")));
+            textArea.click();
+            textArea.sendKeys("Добрый день! \n" +
+                    "Меня заинтересовала ваша вакансия!\n" +
+                    "Сейчас рассматриваю предложения с удаленной работой.\n" +
+                    "Возможна ли удаленная работа или начать удаленно?\n" +
+                    "С уважением, Александр.\n" +
+                    "\n" +
+                    "LinkedIn: https://www.linkedin.com/in/alexandroid1\n" +
+                    "GitHub: https://github.com/alexandroid1\n" +
+                    "Locations: Donetsk, Ukraine\n" +
+                    "Phone: 050-426-31-93\n" +
+                    "Skype: alexandr_pavlov_ukraine\n" +
+                    "E-mail: avpavlov108@gmail.com\n" +
+                    "avpavlov96@gmail.com");
+
 
         }
     }
@@ -119,11 +137,7 @@ public class CVApplyer {
     private void apply(int waitSeconds) {
         if (driver.findElements(By.xpath("//input[contains(@value,'Отправить отклик')]")).size() > 0) {
             try {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                waiteOneSec();
                 WebDriverWait wait = new WebDriverWait(driver, waitSeconds);
                 WebElement submitClickLnk = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[contains(@value,'Отправить отклик')]")));
                 submitClickLnk.click();
