@@ -5,17 +5,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
  * Created by Oleksandr on 29.12.2016.
  */
-public class CVApplyer {
+public class CVApplyer extends TxtFileListTransfer {
 
     private static final String url = "https://hh.ru/vacancy/";
     private final String coverLetter = "Добрый день! \n" +
@@ -59,15 +55,7 @@ public class CVApplyer {
             }
         } else {
             appliedList.add(cvId);
-            listToFile(appliedList);
-        }
-    }
-
-    private void listToFile(List<String> appliedList) {
-        try {
-            Files.write(Paths.get("./appliedList.txt"), appliedList);
-        } catch (IOException e) {
-            e.printStackTrace();
+            listToFile(appliedList, "./appliedList.txt");
         }
     }
 

@@ -5,17 +5,16 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
 import ua.alexandroid1.oleksandr.pages.CVApplyer;
 import ua.alexandroid1.oleksandr.pages.CVLoader;
-import ua.alexandroid1.oleksandr.pages.PropLoader;
+import ua.alexandroid1.oleksandr.pages.TxtFileListTransfer;
 
-import java.io.*;
 import java.util.*;
 
-public class HHRunner extends PropLoader {
+public class HHRunner extends TxtFileListTransfer {
 
     public static void main(String[] args) {
 
         List<String> appliedList = new ArrayList<>();
-        fileToList(appliedList);
+        fileToList(appliedList, "./appliedList.txt");
 
         Properties prop = getProperties();
 
@@ -45,19 +44,6 @@ public class HHRunner extends PropLoader {
                 }
             });
         }
-    }
-
-    private static void fileToList(List<String> appliedList) {
-        Scanner s = null;
-        try {
-            s = new Scanner(new File("./appliedList.txt"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        while (s.hasNext()) {
-            appliedList.add(s.next());
-        }
-        s.close();
     }
 
 }
