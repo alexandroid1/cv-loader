@@ -18,6 +18,19 @@ import java.util.NoSuchElementException;
 public class CVApplyer {
 
     private static final String url = "https://hh.ru/vacancy/";
+    private final String coverLetter = "Добрый день! \n" +
+            "Меня заинтересовала ваша вакансия!\n" +
+            "Сейчас рассматриваю предложения с удаленной работой.\n" +
+            "Возможна ли удаленная работа или начать удаленно?\n" +
+            "С уважением, Александр.\n" +
+            "\n" +
+            "LinkedIn: https://www.linkedin.com/in/alexandroid1\n" +
+            "GitHub: https://github.com/alexandroid1\n" +
+            "Locations: Donetsk, Ukraine\n" +
+            "Phone: 050-426-31-93\n" +
+            "Skype: alexandr_pavlov_ukraine\n" +
+            "E-mail: avpavlov108@gmail.com\n" +
+            "avpavlov96@gmail.com";
     private WebDriver driver;
     private String cvId;
 
@@ -100,29 +113,14 @@ public class CVApplyer {
 
     private void coverLetter() {
         if((driver.findElements(By.xpath("//textarea[@name='letter']")).size() > 0)) {
-
             waiteOneSec();
-
             String parentWindowHandler = driver.getWindowHandle(); // Store your parent window
             driver.switchTo().window(parentWindowHandler);  // switch back to parent window
-
             WebDriverWait wait = new WebDriverWait(driver, 10);
             WebElement textArea = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//textarea[contains(@class,'sized-rows\n" +
                     "                                      HH-VacancyResponsePopup-Letter ')]")));
             textArea.click();
-            textArea.sendKeys("Добрый день! \n" +
-                    "Меня заинтересовала ваша вакансия!\n" +
-                    "Сейчас рассматриваю предложения с удаленной работой.\n" +
-                    "Возможна ли удаленная работа или начать удаленно?\n" +
-                    "С уважением, Александр.\n" +
-                    "\n" +
-                    "LinkedIn: https://www.linkedin.com/in/alexandroid1\n" +
-                    "GitHub: https://github.com/alexandroid1\n" +
-                    "Locations: Donetsk, Ukraine\n" +
-                    "Phone: 050-426-31-93\n" +
-                    "Skype: alexandr_pavlov_ukraine\n" +
-                    "E-mail: avpavlov108@gmail.com\n" +
-                    "avpavlov96@gmail.com");
+            textArea.sendKeys(coverLetter);
         }
     }
 
