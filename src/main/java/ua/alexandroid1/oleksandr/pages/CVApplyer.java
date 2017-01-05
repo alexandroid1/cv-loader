@@ -1,7 +1,6 @@
 package ua.alexandroid1.oleksandr.pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,10 +9,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Set;
 
 /**
  * Created by Oleksandr on 29.12.2016.
@@ -104,9 +101,6 @@ public class CVApplyer {
     private void coverLetter() {
         if((driver.findElements(By.xpath("//textarea[@name='letter']")).size() > 0)) {
 
-                //TODO breakpoint here ???
-                // paste cover letter manually
-
             waiteOneSec();
 
             String parentWindowHandler = driver.getWindowHandle(); // Store your parent window
@@ -129,8 +123,6 @@ public class CVApplyer {
                     "Skype: alexandr_pavlov_ukraine\n" +
                     "E-mail: avpavlov108@gmail.com\n" +
                     "avpavlov96@gmail.com");
-
-
         }
     }
 
