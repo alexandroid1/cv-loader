@@ -20,10 +20,10 @@ public class HHRunner extends TimeSetter {
 
         FirefoxBinary binary = new FirefoxBinary();
         ProfilesIni profileIni = new ProfilesIni();
-        FirefoxProfile myprofile = profileIni.getProfile(prop.getProperty("profileName"));
+        FirefoxProfile myProfile = profileIni.getProfile(prop.getProperty("profileName"));
 
-        myprofile.setAcceptUntrustedCertificates(true);
-        WebDriver driver = new FirefoxDriver(binary, myprofile);
+        myProfile.setAcceptUntrustedCertificates(true);
+        WebDriver driver = new FirefoxDriver(binary, myProfile);
 
         int waitSeconds = getWaitSeconds();
 
