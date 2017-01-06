@@ -3,13 +3,13 @@ import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
+import ua.alexandroid1.oleksandr.settings.TimeSetter;
 import ua.alexandroid1.oleksandr.pages.CVApplyer;
 import ua.alexandroid1.oleksandr.pages.CVLoader;
-import ua.alexandroid1.oleksandr.TxtFileListTransfer;
 
 import java.util.*;
 
-public class HHRunner extends TxtFileListTransfer {
+public class HHRunner extends TimeSetter {
 
     public static void main(String[] args) {
 
@@ -25,8 +25,7 @@ public class HHRunner extends TxtFileListTransfer {
         myprofile.setAcceptUntrustedCertificates(true);
         WebDriver driver = new FirefoxDriver(binary, myprofile);
 
-        double randNumber = Math.random();
-        int waitSeconds = (int) randNumber * 1000 + 500;
+        int waitSeconds = getWaitSeconds();
 
         CVLoader cvLoader = new CVLoader(driver);
         cvLoader
@@ -45,5 +44,4 @@ public class HHRunner extends TxtFileListTransfer {
             });
         }
     }
-
 }

@@ -1,4 +1,4 @@
-package ua.alexandroid1.oleksandr;
+package ua.alexandroid1.oleksandr.settings;
 
 import java.io.FileInputStream;
 import java.io.IOException;

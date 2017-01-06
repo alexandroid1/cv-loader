@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import ua.alexandroid1.oleksandr.TxtFileListTransfer;
+import ua.alexandroid1.oleksandr.settings.TimeSetter;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -14,7 +14,7 @@ import java.util.Properties;
 /**
  * Created by Oleksandr on 29.12.2016.
  */
-public class CVApplyer extends TxtFileListTransfer {
+public class CVApplyer extends TimeSetter {
 
     private final String coverLetter = "Добрый день! \n" +
             "Меня заинтересовала ваша вакансия!\n" +
@@ -69,14 +69,6 @@ public class CVApplyer extends TxtFileListTransfer {
             applyLink.click();
         } catch (NoSuchElementException ignored) {
             System.out.print("-");
-        }
-    }
-
-    private void waiteOneSec() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
     }
 

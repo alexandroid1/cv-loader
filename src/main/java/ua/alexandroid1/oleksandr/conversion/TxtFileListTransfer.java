@@ -1,6 +1,6 @@
-package ua.alexandroid1.oleksandr;
+package ua.alexandroid1.oleksandr.conversion;
 
-import ua.alexandroid1.oleksandr.PropLoader;
+import ua.alexandroid1.oleksandr.settings.PropLoader;
 
 import java.io.File;
 import java.io.FileNotFoundException;
