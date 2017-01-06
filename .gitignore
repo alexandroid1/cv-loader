@@ -58,3 +58,12 @@ fabric.properties
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+.gradle/
+.idea/compiler.xml
+.idea/modules/cv-loader_main.iml
+.idea/modules/cv-loader_test.iml
+.idea/vcs.xml
+appliedList.txt
+build/
+src/main/resources/
+src/test/
