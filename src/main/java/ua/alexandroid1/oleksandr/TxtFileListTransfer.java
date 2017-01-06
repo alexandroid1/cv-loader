@@ -1,4 +1,6 @@
-package ua.alexandroid1.oleksandr.pages;
+package ua.alexandroid1.oleksandr;
+
+import ua.alexandroid1.oleksandr.PropLoader;
 
 import java.io.File;
 import java.io.FileNotFoundException;

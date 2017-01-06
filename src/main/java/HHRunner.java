@@ -5,7 +5,7 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
 import ua.alexandroid1.oleksandr.pages.CVApplyer;
 import ua.alexandroid1.oleksandr.pages.CVLoader;
-import ua.alexandroid1.oleksandr.pages.TxtFileListTransfer;
+import ua.alexandroid1.oleksandr.TxtFileListTransfer;
 
 import java.util.*;
 
