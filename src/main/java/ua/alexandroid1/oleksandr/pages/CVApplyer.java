@@ -7,13 +7,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Properties;
 
 /**
  * Created by Oleksandr on 29.12.2016.
  */
 public class CVApplyer extends TxtFileListTransfer {
 
-    private static final String url = "https://hh.ru/vacancy/";
     private final String coverLetter = "Добрый день! \n" +
             "Меня заинтересовала ваша вакансия!\n" +
             "Сейчас рассматриваю предложения с удаленной работой.\n" +
@@ -36,9 +36,10 @@ public class CVApplyer extends TxtFileListTransfer {
     }
 
     public void applyForCV(List<String> appliedList, int waitSeconds) {
-        driver.get(url + cvId);
+        Properties prop = getProperties();
+        driver.get(prop.getProperty("searchUrlForCV") + cvId);
         System.out.println("");
-        System.out.println(url + cvId);
+        System.out.println(prop.getProperty("searchUrlForCV") + cvId);
         if (driver.findElements(By.xpath("//a[@data-qa='vacancy-response-link']")).size() > 0) {
             preApply();
             if (driver.findElements(By.xpath("//span[@data-qa='vacancy-response-link-force']")).size() > 0) {
@@ -55,7 +56,7 @@ public class CVApplyer extends TxtFileListTransfer {
             }
         } else {
             appliedList.add(cvId);
-            listToFile(appliedList, "./appliedList.txt");
+            listToFile(appliedList, prop.getProperty("appliedFilePath"));
         }
     }
 
@@ -120,7 +121,7 @@ public class CVApplyer extends TxtFileListTransfer {
                 WebElement submitClickLnk = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[contains(@value,'Отправить отклик')]")));
                 submitClickLnk.click();
             } catch (NoSuchElementException ignored) {
-                System.out.print("нет элемента");
+                System.out.print("there is no such element");
             } catch (Exception e) {
                 System.out.print("something wrong");
             }

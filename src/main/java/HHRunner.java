@@ -13,10 +13,10 @@ public class HHRunner extends TxtFileListTransfer {
 
     public static void main(String[] args) {
 
-        List<String> appliedList = new ArrayList<>();
-        fileToList(appliedList, "./appliedList.txt");
-
         Properties prop = getProperties();
+
+        List<String> appliedList = new ArrayList<>();
+        fileToList(appliedList, prop.getProperty("appliedFilePath"));
 
         FirefoxBinary binary = new FirefoxBinary();
         ProfilesIni profileIni = new ProfilesIni();
