@@ -1,5 +1,11 @@
 package ua.alexandroid1.oleksandr.settings;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxBinary;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.firefox.internal.ProfilesIni;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,5 +33,13 @@ public class PropLoader {
             }
         }
         return prop;
+    }
+
+    protected static WebDriver getWebDriver(Properties prop) {
+        FirefoxBinary binary = new FirefoxBinary();
+        ProfilesIni profileIni = new ProfilesIni();
+        FirefoxProfile myProfile = profileIni.getProfile(prop.getProperty("profileName"));
+        myProfile.setAcceptUntrustedCertificates(true);
+        return new FirefoxDriver(binary, myProfile);
     }
 }
