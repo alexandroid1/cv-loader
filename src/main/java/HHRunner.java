@@ -14,16 +14,10 @@ public class HHRunner extends TimeSetter {
     public static void main(String[] args) {
 
         Properties prop = getProperties();
-
         List<String> appliedList = new ArrayList<>();
         fileToList(appliedList, prop.getProperty("appliedFilePath"));
 
-        FirefoxBinary binary = new FirefoxBinary();
-        ProfilesIni profileIni = new ProfilesIni();
-        FirefoxProfile myProfile = profileIni.getProfile(prop.getProperty("profileName"));
-
-        myProfile.setAcceptUntrustedCertificates(true);
-        WebDriver driver = new FirefoxDriver(binary, myProfile);
+        WebDriver driver = getWebDriver(prop);
 
         int waitSeconds = getWaitSeconds();
 
@@ -43,5 +37,13 @@ public class HHRunner extends TimeSetter {
                 }
             });
         }
+    }
+
+    private static WebDriver getWebDriver(Properties prop) {
+        FirefoxBinary binary = new FirefoxBinary();
+        ProfilesIni profileIni = new ProfilesIni();
+        FirefoxProfile myProfile = profileIni.getProfile(prop.getProperty("profileName"));
+        myProfile.setAcceptUntrustedCertificates(true);
+        return new FirefoxDriver(binary, myProfile);
     }
 }
