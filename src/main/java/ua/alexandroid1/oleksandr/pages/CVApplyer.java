@@ -45,7 +45,9 @@ public class CVApplyer extends TimeSetter {
         if (driver.findElements(By.xpath("//a[@data-qa='vacancy-response-link']")).size() > 0) {
             preApply();
             if (driver.findElements(By.xpath("//span[@data-qa='vacancy-response-link-force']")).size() > 0) {
-                applyFromAnywhere(waitSeconds);
+                if (lang.equals("ru")) {
+                    applyFromAnywhere(waitSeconds);
+                }
                 if (driver.findElements(By.xpath("//span[@class='link-switch-secondary']")).size() > 0) {
                     showTextArea(waitSeconds);
                 }
