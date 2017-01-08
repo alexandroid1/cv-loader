@@ -15,11 +15,11 @@ import java.util.Properties;
  * Created by Oleksandr on 27.12.2016.
  */
 public class PropLoader {
-    protected static Properties getProperties() {
+    protected static Properties getProperties(String lang) {
         Properties prop = new Properties();
         InputStream input = null;
         try {
-            input = new FileInputStream("config.properties");
+            input = new FileInputStream(lang + ".properties");
             prop.load(input);
         } catch (IOException ex) {
             ex.printStackTrace();

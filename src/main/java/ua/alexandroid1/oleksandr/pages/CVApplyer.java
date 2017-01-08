@@ -37,8 +37,8 @@ public class CVApplyer extends TimeSetter {
         this.cvId = cvId;
     }
 
-    public void applyForCV(List<String> appliedList, int waitSeconds) {
-        Properties prop = getProperties();
+    public void applyForCV(List<String> appliedList, int waitSeconds, String lang) {
+        Properties prop = getProperties(lang);
         driver.get(prop.getProperty("searchUrlForCV") + cvId);
         System.out.println("");
         System.out.println(prop.getProperty("searchUrlForCV") + cvId);

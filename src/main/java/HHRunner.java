@@ -7,31 +7,36 @@ import java.util.*;
 
 public class HHRunner extends TimeSetter {
 
+    private static final String[] HHLANGS = { "ru", "ua" };
+
     public static void main(String[] args) {
 
-        Properties prop = getProperties();
-        List<String> appliedList = new ArrayList<>();
-        fileToList(appliedList, prop.getProperty("appliedFilePath"));
-        WebDriver driver = getWebDriver(prop);
-        int waitSeconds = getWaitSeconds();
+        for (int i = 0; i < HHLANGS.length; i++) {
+            System.out.println("Language = " + HHLANGS[i] + " Loaded  ");
 
-        CVLoader cvLoader = new CVLoader(driver);
-        cvLoader
-                .setSearchURL(prop.getProperty("searchURL"))
-                .setSearchKeyWord(prop.getProperty("searchKeyWord"))
-                .searchByKeyWord(waitSeconds);
+            Properties prop = getProperties(HHLANGS[i]);
+            List<String> appliedList = new ArrayList<>();
+            fileToList(appliedList, prop.getProperty("appliedFilePath"));
+            WebDriver driver = getWebDriver(prop);
+            int waitSeconds = getWaitSeconds();
 
-        while (cvLoader.getNextPage(waitSeconds)) {
-            ArrayList<String> getCvIds = cvLoader.getCvIds(waitSeconds);
+            CVLoader cvLoader = new CVLoader(driver);
+            cvLoader
+                    .setSearchURL(prop.getProperty("searchURL"))
+                    .setSearchKeyWord(prop.getProperty("searchKeyWord"))
+                    .searchByKeyWord(waitSeconds);
 
-            getCvIds.forEach((cvId) -> {
-                if(! appliedList.contains(cvId) ){
-                    CVApplyer cvApplyer = new CVApplyer(driver, cvId);
-                    cvApplyer.applyForCV(appliedList, waitSeconds);
-                }
-            });
+            while (cvLoader.getNextPage(waitSeconds)) {
+                ArrayList<String> getCvIds = cvLoader.getCvIds(waitSeconds);
+
+                int langNum = i;
+                getCvIds.forEach((cvId) -> {
+                    if(! appliedList.contains(cvId) ){
+                        CVApplyer cvApplyer = new CVApplyer(driver, cvId);
+                        cvApplyer.applyForCV(appliedList, waitSeconds, HHLANGS[langNum]);
+                    }
+                });
+            }
         }
     }
-
-
 }
