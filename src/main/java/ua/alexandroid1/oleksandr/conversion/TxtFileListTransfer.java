@@ -9,10 +9,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
-
 /**
  * Created by Oleksandr on 05.01.2017.
  */
+
+
 public class TxtFileListTransfer extends PropLoader {
 
     protected static void fileToList(List<String> appliedList, String src) {
