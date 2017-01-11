@@ -6,7 +6,7 @@ public class HHRunner extends HHfinder {
         Thread HHThreadRU = new Thread(() -> searchByDomain("ru"));
         Thread HHThreadUA = new Thread(() -> searchByDomain("ua"));
 
-        // parallel search
+        // parallel search for https://hh.ru and https://hh.ua
         HHThreadRU.start();
         HHThreadUA.start();
     }
