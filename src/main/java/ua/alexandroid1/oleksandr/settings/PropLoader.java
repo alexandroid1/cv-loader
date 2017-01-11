@@ -14,7 +14,7 @@ import java.util.Properties;
 /**
  * Created by Oleksandr on 27.12.2016.
  */
-public class PropLoader {
+public class PropLoader extends WebDriverLoader {
     protected static Properties getProperties(String lang) {
         Properties prop = new Properties();
         InputStream input = null;
@@ -35,11 +35,4 @@ public class PropLoader {
         return prop;
     }
 
-    protected static WebDriver getWebDriver(Properties prop) {
-        FirefoxBinary binary = new FirefoxBinary();
-        ProfilesIni profileIni = new ProfilesIni();
-        FirefoxProfile myProfile = profileIni.getProfile(prop.getProperty("profileName"));
-        myProfile.setAcceptUntrustedCertificates(true);
-        return new FirefoxDriver(binary, myProfile);
-    }
 }

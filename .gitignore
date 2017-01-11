@@ -67,3 +67,7 @@ appliedList.txt
 build/
 src/main/resources/
 src/test/
+/ua.properties
+/ru.properties
+/appliedListUA.txt
+/appliedListRU.txt

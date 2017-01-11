@@ -5,7 +5,6 @@ public class HHRunner extends HHfinder {
 
         searchByDomain("ru");
         //searchByDomain("ua");
-
     }
 
 }

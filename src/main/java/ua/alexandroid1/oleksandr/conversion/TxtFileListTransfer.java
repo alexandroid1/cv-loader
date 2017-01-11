@@ -16,7 +16,7 @@ import java.util.Scanner;
 
 public class TxtFileListTransfer extends PropLoader {
 
-    protected static void fileToList(List<String> appliedList, String src) {
+    public static void fileToList(List<String> appliedList, String src) {
         Scanner s = null;
         try {
             s = new Scanner(new File(src));

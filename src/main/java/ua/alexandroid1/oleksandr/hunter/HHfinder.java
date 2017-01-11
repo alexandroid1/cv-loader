@@ -19,7 +19,13 @@ public class HHfinder extends TimeSetter {
         Properties prop = getProperties(currentLang);
         List<String> appliedList = new ArrayList<>();
         fileToList(appliedList, prop.getProperty("appliedFilePath"));
-        WebDriver driver = getWebDriver(prop);
+
+        // login with FireFox profile
+        //WebDriver driver = getGeckoWebDriver(prop);
+
+        // login with login and pass
+        WebDriver driver = getChromeWebDriverAndLogin(prop);
+
         int waitSeconds = getWaitSeconds();
 
         CVLoader cvLoader = new CVLoader(driver);
