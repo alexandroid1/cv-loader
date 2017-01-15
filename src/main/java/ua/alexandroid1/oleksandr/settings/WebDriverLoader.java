@@ -7,15 +7,15 @@ import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
-import ua.alexandroid1.oleksandr.pages.HHLogin;
+
 import java.util.Properties;
 
-import static ua.alexandroid1.oleksandr.conversion.TxtFileListTransfer.fileToList;
+import static ua.alexandroid1.oleksandr.pages.HHLogin.loginToHH;
 
 /**
  * Created by Oleksandr on 11.01.2017.
  */
-public class WebDriverLoader extends HHLogin {
+public class WebDriverLoader {
 
     protected static WebDriver getGeckoWebDriver(Properties prop) {
         FirefoxBinary binary = new FirefoxBinary();
@@ -25,7 +25,7 @@ public class WebDriverLoader extends HHLogin {
         return new FirefoxDriver(binary, myProfile);
     }
 
-    protected static WebDriver getChromeWebDriverAndLogin(Properties prop) {
+    public static WebDriver getChromeWebDriverAndLogin(Properties prop) {
 
         ChromeDriverManager.getInstance().setup();
         ChromeDriver driver = new ChromeDriver();

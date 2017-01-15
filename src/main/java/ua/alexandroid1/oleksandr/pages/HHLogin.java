@@ -14,7 +14,7 @@ import static ua.alexandroid1.oleksandr.conversion.TxtFileListTransfer.fileToLis
  * Created by Oleksandr on 11.01.2017.
  */
 public class HHLogin {
-    protected static void loginToHH(Properties prop, ChromeDriver driver) {
+    public static void loginToHH(Properties prop, ChromeDriver driver) {
 
         List<String> passwordList = new ArrayList<>();
         fileToList(passwordList, prop.getProperty("loginpassfile"));

@@ -5,16 +5,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import ua.alexandroid1.oleksandr.settings.TimeSetter;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Properties;
 
+import static ua.alexandroid1.oleksandr.conversion.TxtFileListTransfer.listToFile;
+import static ua.alexandroid1.oleksandr.settings.PropLoader.getProperties;
+import static ua.alexandroid1.oleksandr.settings.TimeSetter.waiteOneSec;
+
 /**
  * Created by Oleksandr on 29.12.2016.
  */
-public class CVApplyer extends TimeSetter {
+public class CVApplyer {
 
     private final String coverLetter = "Добрый день! \n" +
             "Меня заинтересовала ваша вакансия!\n" +

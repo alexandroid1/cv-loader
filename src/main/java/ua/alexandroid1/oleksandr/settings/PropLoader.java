@@ -1,11 +1,5 @@
 package ua.alexandroid1.oleksandr.settings;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxBinary;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.firefox.internal.ProfilesIni;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,8 +8,8 @@ import java.util.Properties;
 /**
  * Created by Oleksandr on 27.12.2016.
  */
-public class PropLoader extends WebDriverLoader {
-    protected static Properties getProperties(String lang) {
+public class PropLoader {
+    public static Properties getProperties(String lang) {
         Properties prop = new Properties();
         InputStream input = null;
         try {

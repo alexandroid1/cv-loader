@@ -1,7 +1,5 @@
 package ua.alexandroid1.oleksandr.conversion;
 
-import ua.alexandroid1.oleksandr.settings.PropLoader;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,7 +12,7 @@ import java.util.Scanner;
  */
 
 
-public class TxtFileListTransfer extends PropLoader {
+public class TxtFileListTransfer {
 
     public static void fileToList(List<String> appliedList, String src) {
         Scanner s = null;
@@ -29,7 +27,7 @@ public class TxtFileListTransfer extends PropLoader {
         s.close();
     }
 
-    protected void listToFile(List<String> appliedList, String src) {
+    public static void listToFile(List<String> appliedList, String src) {
         try {
             Files.write(Paths.get(src), appliedList);
         } catch (IOException e) {
