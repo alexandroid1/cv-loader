@@ -51,6 +51,7 @@ public class CVApplyer {
                 if (lang.equals("ru")) {
                     applyFromAnywhere(waitSeconds);
                 }
+                waiteOneSec();
                 if (driver.findElements(By.xpath("//span[@class='link-switch-secondary']")).size() > 0) {
                     showTextArea(waitSeconds);
                 }
