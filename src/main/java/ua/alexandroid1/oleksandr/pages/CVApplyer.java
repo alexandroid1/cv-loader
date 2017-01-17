@@ -52,7 +52,7 @@ public class CVApplyer {
                     applyFromAnywhere(waitSeconds);
                 }
                 waiteOneSec();
-                if (driver.findElements(By.xpath("//span[@class='link-switch-secondary']")).size() > 0) {
+                if (driver.findElements(By.xpath("//span[@class='bloko-link-switch bloko-link-switch_secondary']")).size() > 0) {
                     showTextArea(waitSeconds);
                 }
                 if((driver.findElements(By.xpath("//input[contains(@value,'Отправить отклик')]")).size() > 0)){
@@ -93,7 +93,7 @@ public class CVApplyer {
         try {
             waiteOneSec();
             WebDriverWait wait = new WebDriverWait(driver, waitSeconds);
-            WebElement showTextArea = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@class='link-switch-secondary']")));
+            WebElement showTextArea = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@class='bloko-link-switch bloko-link-switch_secondary']")));
             showTextArea.click();
         } catch (NoSuchElementException ignored) {
             System.out.print("-");
@@ -103,11 +103,12 @@ public class CVApplyer {
     private void coverLetter() {
         if((driver.findElements(By.xpath("//textarea[@name='letter']")).size() > 0)) {
             waiteOneSec();
-            String parentWindowHandler = driver.getWindowHandle(); // Store your parent window
-            driver.switchTo().window(parentWindowHandler);  // switch back to parent window
-            WebDriverWait wait = new WebDriverWait(driver, 10);
-            WebElement textArea = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//textarea[contains(@class,'sized-rows\n" +
-                    "                                      HH-VacancyResponsePopup-Letter ')]")));
+            //String parentWindowHandler = driver.getWindowHandle(); // Store your parent window
+            //driver.switchTo().window(parentWindowHandler);  // switch back to parent window
+            //WebDriverWait wait = new WebDriverWait(driver, 10);
+            waiteOneSec();
+            WebElement textArea = driver.findElement(By.xpath("html/body/div[8]/div[1]/div[2]/div/form/div[2]/div/textarea"));
+            //WebElement textArea = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//textarea[contains(@class,'bloko-textarea                    bloko-textarea_sized-rows                    HH-VacancyResponsePopup-Letter ')]")));
             textArea.click();
             textArea.sendKeys(coverLetter);
         }
