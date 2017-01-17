@@ -1,6 +1,5 @@
 package ua.alexandroid1.oleksandr.pages;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -56,8 +55,8 @@ public class CVLoader {
         searchButton.click();
     }
 
-    public ArrayList<String> getCvIds(int waitSeconds) {
-        ArrayList<String> getProfileIds = new ArrayList<String>();
+    public ArrayList<String> getCvIds() {
+        ArrayList<String> getProfileIds = new ArrayList<>();
         try {
             java.util.List<WebElement> links = driver.findElements(By.xpath("//a[@data-qa='vacancy-serp__vacancy-title']"));
             for (int i = 0; i < links.size(); i++) {

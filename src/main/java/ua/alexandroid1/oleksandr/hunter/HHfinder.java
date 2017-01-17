@@ -24,10 +24,6 @@ public class HHfinder {
         List<String> appliedList = new ArrayList<>();
         fileToList(appliedList, prop.getProperty("appliedFilePath"));
 
-        // login with FireFox profile
-        //WebDriver driver = getGeckoWebDriver(prop);
-
-        // login with login and pass
         WebDriver driver = getChromeWebDriverAndLogin(prop);
 
         int waitSeconds = getWaitSeconds();
@@ -39,7 +35,7 @@ public class HHfinder {
                 .searchByKeyWord(waitSeconds);
 
         while (cvLoader.getNextPage(waitSeconds)) {
-            ArrayList<String> getCvIds = cvLoader.getCvIds(waitSeconds);
+            ArrayList<String> getCvIds = cvLoader.getCvIds();
 
             getCvIds.forEach((cvId) -> {
                 if(! appliedList.contains(cvId) ){

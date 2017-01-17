@@ -22,7 +22,6 @@ public class HHLogin {
         String loginStr = passwordList.get(0);
         String passwordStr = passwordList.get(1);
 
-        // Resize the browser screen to make sure that the input field is not hidden.
         driver.manage().window().maximize();
 
         driver.get(prop.getProperty("searchURL"));
