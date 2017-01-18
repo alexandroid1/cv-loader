@@ -103,12 +103,7 @@ public class CVApplyer {
     private void coverLetter() {
         if((driver.findElements(By.xpath("//textarea[@name='letter']")).size() > 0)) {
             waiteOneSec();
-            //String parentWindowHandler = driver.getWindowHandle(); // Store your parent window
-            //driver.switchTo().window(parentWindowHandler);  // switch back to parent window
-            //WebDriverWait wait = new WebDriverWait(driver, 10);
-            waiteOneSec();
             WebElement textArea = driver.findElement(By.xpath("html/body/div[8]/div[1]/div[2]/div/form/div[2]/div/textarea"));
-            //WebElement textArea = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//textarea[contains(@class,'bloko-textarea                    bloko-textarea_sized-rows                    HH-VacancyResponsePopup-Letter ')]")));
             textArea.click();
             textArea.sendKeys(coverLetter);
         }
