@@ -2,4 +2,4 @@
 cv-loader project
 
 
-Simple programm to sent your CV over HeadHunter
+Simple program to sent your CV over HeadHunter
